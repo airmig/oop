@@ -1,16 +1,22 @@
-from hr import PayrollSystem
-from productivity import ProductivitySystem
-from employees import EmployeeDatabase
 import logging
+import employees
+import productivity
+import hr
+import json
+
+def print_dict(d):
+    return(json.dumps(d, indent=2))
+
 
 try:
     logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(process)d - %(levelname)s - %(message)s")
-    productivity_system = ProductivitySystem()
-    payroll_system = PayrollSystem()
-    employee_database = EmployeeDatabase()
-    employees = employee_database.employees()
+    workers = employees.employee_database.employees()
+    productivity.track(workers, 40)
+    hr.calculate_payroll(workers)
 
-    productivity_system.track(employees, 40)
-    payroll_system.calculate_payroll(employees)
+    temp_secretary = employees.Employee(5)
+    logging.info(dir(temp_secretary))
+    logging.info(print_dict(temp_secretary.to_dict()))
+
 except:
     logging.exception("Fatal error")

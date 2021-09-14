@@ -3,7 +3,7 @@ logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(process)d %(level
 
 class Mixin:
     def to_dict(self):
-        logging.info(self.__dict__.items())
+        #logging.info(self.__dict__.items())
         return {
             prop: self._represent(value)
             for prop, value in self.__dict__.items()
@@ -37,4 +37,4 @@ class SampleClass(Mixin):
 
 
 s = SampleClass()
-logging.info(s.to_dict())
+#logging.info(s.to_dict())

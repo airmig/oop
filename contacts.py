@@ -1,4 +1,5 @@
-class AddressBook:
+import mixin
+class _AddressBook:
     def __init__(self):
         self._employee_addresses = {
             1: Address('1 address', 'city', 'state', '00001'),
@@ -14,7 +15,7 @@ class AddressBook:
             raise ValueError(employee_id)
         return address
 
-class Address:
+class Address(mixin.Mixin):
     def __init__(self, street, city, state, zipcode, street2=''):
         self.street = street
         self.city = city
@@ -28,3 +29,8 @@ class Address:
             lines.append(self.street2)
         lines.append(f"{self.city}, {self.state}, {self.zipcode}")
         return '\n'.join(lines)
+
+_address_book = _AddressBook()
+
+def get_employee_address(employee_id):
+    return _address_book.get_employee_address(employee_id)

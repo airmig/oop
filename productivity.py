@@ -1,6 +1,8 @@
 import logging
+import employees
 
-class ProductivitySystem:
+""" do no instantiate this class """
+class _ProductivitySystem:
     def __init__(self):
         """ underscore dont access outside the class """
         self._roles = {
@@ -40,3 +42,12 @@ class FactoryRole:
     def work(self, hours):
         logging.info("factory working")
         return "factory working"
+
+_productivity_system = _ProductivitySystem()
+
+""" public interfaceto productivity system """
+def get_role(role_id):
+    return _productivity_system.get_role(role_id)
+
+def track(employees, hours):
+    return _productivity_system.track(employees, hours)

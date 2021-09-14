@@ -1,6 +1,6 @@
 import logging
 
-class PayrollSystem:
+class _PayrollSystem:
     def __init__(self):
         self._employee_policies = {
             1: SalaryPolicy(3000),
@@ -48,7 +48,7 @@ class HourlyPolicy(PayrollPolicy):
         self.hour_rate = hour_rate
 
     def calculate_payroll(self):
-        return self.hour_rate * self.hours_worked
+        return self.hour_rate * self.hours
 
 class CommissionPolicy(SalaryPolicy):
     def __init__(self, weekly_salary, commission_per_sale):
@@ -62,3 +62,12 @@ class CommissionPolicy(SalaryPolicy):
     def calculate_payroll(self):
         fixed = super().calculate_payroll()
         return fixed + self.commission()
+
+_payroll_system = _PayrollSystem()
+
+def get_policy(employee_id):
+    return _payroll_system.get_policy(employee_id)
+
+
+def calculate_payroll(employees):
+    return _payroll_system.calculate_payroll(employees)
